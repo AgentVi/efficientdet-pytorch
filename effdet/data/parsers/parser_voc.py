@@ -10,6 +10,64 @@ import numpy as np
 from .parser import Parser
 from .parser_config import VocParserCfg
 
+labelToGTClassMap = {
+    "car":"innovi.vehicle.car", 
+    "motorcycle":"innovi.twoWheeled.motorcycle", 
+    "suv":"innovi.vehicle.car", 
+    "bicycle":"innovi.twoWheeled.bicycle", 
+    "personStanding":"innovi.people.personStanding", 
+    "smallTruck":"innovi.vehicle.truck", 
+    "bus":"innovi.vehicle.bus", 
+    "schoolBus": "innovi.vehicle.bus",
+    "miniBus": "innovi.vehicle.bus",
+    "cityBus": "innovi.vehicle.bus",
+    "personOnTheGround":"innovi.people.personOnTheGround", 
+    "largeAnimal":"innovi.animal.largeAnimal",
+    "personOverhead":"innovi.people.personStanding", 
+    "van":"innovi.vehicle.van", 
+    "pickupTruck":"innovi.vehicle.pickupTruck", 
+    "mediumTruck":"innovi.vehicle.truck", 
+    "personSitting":"innovi.people.personOnTheGround",
+    "smallAnimal":"innovi.animal.smallAnimal",
+    "bird":"innovi.animal.bird", 
+    "bigTruck":"innovi.vehicle.truck",  
+    "tractor":"innovi.vehicle.truck",
+    "animal": "innovi.animal.largeAnimal",
+    "large animal": "innovi.animal.largeAnimal",
+    "large_animal": "innovi.animal.largeAnimal",
+    "catDog": "innovi.animal.smallAnimal",
+    "person": "innovi.people.personStanding",
+    "person standing": "innovi.people.personStanding",
+    "truck": "innovi.vehicle.truck",
+    "big truck": "innovi.vehicle.truck",
+    "big_truck": "innovi.vehicle.truck",
+    "bigTruck":"innovi.vehicle.truck",
+    "smallTruck": "innovi.vehicle.truck",
+    "mediumTruck": "innovi.vehicle.truck",
+    "vehicle": "innovi.vehicle.car",
+    "suv": "innovi.vehicle.car",
+    "vehicleNight": "innovi.vehicle.car",
+    "person on the ground": "innovi.people.personOnTheGround",
+    "person_on_the_ground": "innovi.people.personOnTheGround",
+    "personOnTheGround": "innovi.people.personOnTheGround",
+    "person overhead": "innovi.people.personStanding",
+    "person_overhead": "innovi.people.personStanding",
+    "pickup truck": "innovi.vehicle.pickupTruck",
+    "pickup_truck": "innovi.vehicle.pickupTruck",
+    "person-crouching": "innovi.people.personOnTheGround",
+    "person-lying-down": "innovi.people.personOnTheGround",
+    "personSitting": "innovi.people.personStanding",
+    "person-sitting-floor": "innovi.people.personOnTheGround",
+    "person-sitting-chair": "innovi.people.personStanding",
+    "person-standing": "innovi.people.personStanding",
+    "person_standing": "innovi.people.personStanding",
+    "schoolBus":"innovi.vehicle.bus",
+    "miniBus":"innovi.vehicle.bus",
+    "cityBus":"innovi.vehicle.bus",
+    "semiTrailers":"innovi.vehicle.truck",
+    "forklift":"innovi.vehicle.truck",
+    "compactCar":"innovi.vehicle.car"                             
+}
 
 class VocParser(Parser):
 
@@ -70,14 +128,16 @@ class VocParser(Parser):
             anns = []
             for obj_idx, obj in enumerate(root.findall('object')):
                 name = obj.find('name').text
+                if name not in self.cat_id_to_label.keys():
+                    name = labelToGTClassMap[name]
                 label = self.cat_id_to_label[name]
                 difficult = int(obj.find('difficult').text)
                 bnd_box = obj.find('bndbox')
                 bbox = [
-                    int(bnd_box.find('xmin').text),
-                    int(bnd_box.find('ymin').text),
-                    int(bnd_box.find('xmax').text),
-                    int(bnd_box.find('ymax').text)
+                    int(float(bnd_box.find('xmin').text)),
+                    int(float(bnd_box.find('ymin').text)),
+                    int(float(bnd_box.find('xmax').text)),
+                    int(float(bnd_box.find('ymax').text))
                 ]
                 anns.append(dict(label=label, bbox=bbox, difficult=difficult))
 

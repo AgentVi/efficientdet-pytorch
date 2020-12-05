@@ -44,6 +44,27 @@ class VocCfg:
     img_filename: str = '%s.jpg'
     splits: Dict[str, dict] = None
 
+@dataclass
+class OursCfg:
+    variant: str = None
+    parser: str = 'voc'
+    num_classes: int = 12
+    img_filename: str = '%s.jpg'
+    splits: Dict[str, dict] = None
+    classes = [
+            "innovi.twoWheeled.bicycle",
+            "innovi.animal.bird",
+            "innovi.vehicle.bus",
+            "innovi.vehicle.car",
+            "innovi.animal.smallAnimal",
+            "innovi.animal.largeAnimal",
+            "innovi.twoWheeled.motorcycle",
+            "innovi.people.personOnTheGround",
+            "innovi.people.personStanding",
+            "innovi.vehicle.pickupTruck",
+            "innovi.vehicle.truck",
+            "innovi.vehicle.van"
+        ]
 
 @dataclass
 class Voc2007Cfg(VocCfg):
@@ -92,6 +113,20 @@ class Voc0712Cfg(VocCfg):
         #test=dict(img_dir='JPEGImages', split_file=None)
     ))
 
+@dataclass
+class VocOursCfg(OursCfg):
+    variant: str = '2007'
+    splits: Dict[str, dict] = field(default_factory=lambda: dict(
+        train=dict(
+            split_filename='train.txt',
+            ann_filename='Annotations/%s.xml',
+            img_dir='Images', ),
+        val=dict(
+            split_filename='val.txt',
+            ann_filename='Annotations/%s.xml',
+            img_dir='Images'),
+        #test=dict(img_dir='JPEGImages')
+    ))
 
 
 @dataclass

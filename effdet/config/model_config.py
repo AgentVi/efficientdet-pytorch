@@ -527,6 +527,18 @@ efficientdet_model_param_dict = dict(
         backbone_args=dict(drop_path_rate=0.2),
         url='',
     ),
+    efficientdet_d0_128=dict(
+        name='efficientdet_d0_128',
+        backbone_name='efficientnet_b0',
+        image_size=(128, 128),
+        fpn_channels=64,
+        fpn_cell_repeats=3,
+        box_class_repeats=3,
+        pad_type='',
+        redundant_bias=False,
+        backbone_args=dict(drop_path_rate=0.1),
+        url='https://github.com/rwightman/efficientdet-pytorch/releases/download/v0.1/efficientdet_d0-f3276ba8.pth',
+    ),
 )
 
 

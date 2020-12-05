@@ -58,6 +58,7 @@ parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
 # Dataset / Model parameters
 parser.add_argument('root', metavar='DIR',
                     help='path to dataset')
+parser.add_argument('val_root', help='path to validation dataset')
 parser.add_argument('--dataset', default='coco', type=str, metavar='DATASET',
                     help='Name of model to train (default: "coco"')
 parser.add_argument('--model', default='tf_efficientdet_d1', type=str, metavar='MODEL',
@@ -432,7 +433,7 @@ def main():
 def create_datasets_and_loaders(args, model_config):
     input_config = resolve_input_config(args, model_config=model_config)
 
-    dataset_train, dataset_eval = create_dataset(args.dataset, args.root)
+    dataset_train, dataset_eval = create_dataset(args.dataset, args.root, val_root=args.val_root)
 
     # setup labeler in loader/collate_fn if not enabled in the model bench
     labeler = None
