@@ -106,7 +106,7 @@ class ResizePad:
 
 class RandomResizePad:
 
-    def __init__(self, target_size: int, scale: tuple = (0.1, 2.0), interpolation: str = 'bilinear',
+    def __init__(self, target_size: int, scale: tuple = (0.8, 1.2), interpolation: str = 'bilinear',
                  fill_color: tuple = (0, 0, 0)):
         self.target_size = _size_tuple(target_size)
         self.scale = scale

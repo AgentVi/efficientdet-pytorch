@@ -1,13 +1,13 @@
 model: efficientdet_d0_128 
 dataset: ours
-b: 256
-amp:
+batch_size: 256
+amp: true
 lr: .008 
-sync-bn:
+sync-bn: true
 opt: fusedmomentum 
-warmup-epochs: 3 
-model-ema:
+warmup-epochs: 1 
+model-ema: true
 model-ema-decay: 0.9966 
 epochs: 50 
 num-classes: 12 
-pretrained:
+pretrained: true
