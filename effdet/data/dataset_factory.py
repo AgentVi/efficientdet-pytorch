@@ -99,37 +99,26 @@ def create_dataset(name, root, splits=('train', 'val'), val_root=""):
             if s not in dataset_cfg.splits:
                 raise RuntimeError(f'{s} split not found in config')
             split_cfg = dataset_cfg.splits[s]
-            if isinstance(split_cfg['split_filename'], (tuple, list)):
-                assert len(split_cfg['split_filename']) == len(split_cfg['ann_filename'])
-                parser = None
-                for sf, af, id in zip(
-                        split_cfg['split_filename'], split_cfg['ann_filename'], split_cfg['img_dir']):
-                    parser_cfg = VocParserCfg(
-                        split_filename=root / sf,
-                        ann_filename=os.path.join(root, af),
-                        img_filename=os.path.join(id, dataset_cfg.img_filename))
-                    if parser is None:
-                        parser = create_parser(dataset_cfg.parser, cfg=parser_cfg)
-                    else:
-                        other_parser = create_parser(dataset_cfg.parser, cfg=parser_cfg)
-                        parser.merge(other=other_parser)
-            else:
-                if s == 'train':
-                    parser_cfg = VocParserCfg(
-                        split_filename=root / split_cfg['split_filename'],
-                        ann_filename=os.path.join(root, split_cfg['ann_filename']),
-                        img_filename=os.path.join(split_cfg['img_dir'], dataset_cfg.img_filename),
-                        classes=dataset_cfg.classes,
-                    )
-                elif s == 'val':
-                     parser_cfg = VocParserCfg(
-                        split_filename=val_root / split_cfg['split_filename'],
-                        ann_filename=os.path.join(val_root, split_cfg['ann_filename']),
-                        img_filename=os.path.join(split_cfg['img_dir'], dataset_cfg.img_filename),
-                        classes=dataset_cfg.classes,
-                    )
+            
+            if s == 'train':
+                parser_cfg = VocParserCfg(
+                    split_filename=root / split_cfg['split_filename'],
+                    ann_filename=os.path.join(root, split_cfg['ann_filename']),
+                    img_filename=os.path.join(split_cfg['img_dir'], dataset_cfg.img_filename),
+                    classes=dataset_cfg.classes,
+                )
                 parser = create_parser(dataset_cfg.parser, cfg=parser_cfg)
-            datasets[s] = dataset_cls(data_dir=root, parser=parser)
+                datasets[s] = dataset_cls(data_dir=root, parser=parser)
+                
+            elif s == 'val':
+                parser_cfg = VocParserCfg(
+                    split_filename=val_root / split_cfg['split_filename'],
+                    ann_filename=os.path.join(val_root, split_cfg['ann_filename']),
+                    img_filename=os.path.join(split_cfg['img_dir'], dataset_cfg.img_filename),
+                    classes=dataset_cfg.classes,
+                )
+                parser = create_parser(dataset_cfg.parser, cfg=parser_cfg)
+                datasets[s] = dataset_cls(data_dir=val_root, parser=parser)
     else:
         assert False, f'Unknown dataset parser ({name})'
 
