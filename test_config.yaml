@@ -6,8 +6,8 @@ lr: .008
 sync-bn: true
 opt: fusedmomentum 
 warmup-epochs: 1 
-model-ema: true
-model-ema-decay: 0.9966 
+model_ema: true
+model_ema_decay: 0.9966 
 epochs: 50 
-num-classes: 12 
+num_classes: 12 
 pretrained: true
