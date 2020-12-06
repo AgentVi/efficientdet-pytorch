@@ -135,7 +135,7 @@ def validate(args):
     if args.num_gpu > 1:
         bench = torch.nn.DataParallel(bench, device_ids=list(range(args.num_gpu)))
 
-    dataset = create_dataset(args.dataset, args.root, args.split)
+    dataset = create_dataset(args.dataset, '', args.split, args.root)
     input_config = resolve_input_config(args, model_config)
     loader = create_loader(
         dataset,
