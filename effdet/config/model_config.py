@@ -539,6 +539,18 @@ efficientdet_model_param_dict = dict(
         backbone_args=dict(drop_path_rate=0.1),
         url='https://github.com/rwightman/efficientdet-pytorch/releases/download/v0.1/efficientdet_d0-f3276ba8.pth',
     ),
+    tf_efficientdet_d7_128=dict(
+        name='tf_efficientdet_d7',
+        backbone_name='tf_efficientnet_b6',
+        image_size=(128, 128),
+        fpn_channels=384,
+        fpn_cell_repeats=8,
+        box_class_repeats=5,
+        anchor_scale=5.0,
+        fpn_name='bifpn_sum',  # Use unweighted sum for training stability.
+        backbone_args=dict(drop_path_rate=0.2),
+        url='https://github.com/rwightman/efficientdet-pytorch/releases/download/v0.1/tf_efficientdet_d7_53-6d1d7a95.pth'
+    ),
 )
 
 
