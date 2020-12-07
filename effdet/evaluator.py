@@ -163,7 +163,7 @@ class TfmEvaluator(Evaluator):
         self.reset()
         return map_metric
 
-    def save(self, fileName):
+    def save(self, result_file):
         json.dump(self.results, open(result_file, 'w'), indent=4)
 
 class PascalEvaluator(TfmEvaluator):
