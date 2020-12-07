@@ -142,9 +142,12 @@ class TfmEvaluator(Evaluator):
                 bbox = img_dets[:, 0:4] if self.pred_yxyx else img_dets[:, [1, 0, 3, 2]]
                 det = dict(bbox=bbox, score=img_dets[:, 4], cls=img_dets[:, 5])
                 self._evaluator.add_single_detected_image_info(img_idx, det)
-                self.results[img_idx] = []
+                image_id = self._dataset.img_ids[img_idx]
+                self.results[image_id] = []
+
                 for i in range(len(img_dets)):
-                    self.results[img_idx].append(dict(bbox=img_dets[i][[1, 0, 3, 2]], conf=img_dets[i][4], label=img_dets[i][5]+1))
+                    
+                    self.results[image_id].append(dict(bbox=img_dets[i][[1, 0, 3, 2]], conf=img_dets[i][4], label=img_dets[i][5]+1))
 
             metrics = self._evaluator.evaluate()
             _logger.info('Metrics:')
