@@ -147,7 +147,7 @@ class TfmEvaluator(Evaluator):
 
                 for i in range(len(img_dets)):
                     
-                    self.results[image_id].append(dict(bbox=img_dets[i][[1, 0, 3, 2]].tolist(), conf=img_dets[i][4], label=img_dets[i][5]+1))
+                    self.results[image_id].append(dict(bbox=img_dets[i][[1, 0, 3, 2]].tolist(), conf=img_dets[i][4].astype(float), label=img_dets[i][5].astype(int)+1))
 
             metrics = self._evaluator.evaluate()
             _logger.info('Metrics:')
