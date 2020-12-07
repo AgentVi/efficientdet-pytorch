@@ -126,6 +126,7 @@ class TfmEvaluator(Evaluator):
         self._evaluator = evaluator_cls(categories=dataset.parser.cat_dicts)
         self._eval_metric_name = self._evaluator._metric_names[0]
         self._dataset = dataset.parser
+        self.results = dict()
 
     def reset(self):
         self._evaluator.clear()
@@ -141,6 +142,9 @@ class TfmEvaluator(Evaluator):
                 bbox = img_dets[:, 0:4] if self.pred_yxyx else img_dets[:, [1, 0, 3, 2]]
                 det = dict(bbox=bbox, score=img_dets[:, 4], cls=img_dets[:, 5])
                 self._evaluator.add_single_detected_image_info(img_idx, det)
+                self.results[img_idx] = []
+                for i in range(len(img_dets))
+                    self.results[img_idx].append(dict(bbox=img_dets[i][[1, 0, 3, 2]], conf=img_dets[i][4], label=img_dets[i][5]+1))
 
             metrics = self._evaluator.evaluate()
             _logger.info('Metrics:')
@@ -159,6 +163,8 @@ class TfmEvaluator(Evaluator):
         self.reset()
         return map_metric
 
+    def save(self, fileName):
+        json.dump(self.results, open(result_file, 'w'), indent=4)
 
 class PascalEvaluator(TfmEvaluator):
 
