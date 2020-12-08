@@ -147,7 +147,7 @@ class TfmEvaluator(Evaluator):
 
                 for i in range(len(img_dets)):
                     if float(img_dets[i][4]) > 0.2:
-                        self.results[image_id].append(dict(bbox=img_dets[i][[1, 0, 3, 2]].tolist(), conf=float(img_dets[i][4]), label=int(img_dets[i][5]+1)))
+                        self.results[image_id].append(dict(bbox=img_dets[i][[0, 1, 2, 3]].tolist(), conf=float(img_dets[i][4]), label=int(img_dets[i][5]+1)))
 
             metrics = self._evaluator.evaluate()
             _logger.info('Metrics:')

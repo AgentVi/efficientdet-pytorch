@@ -551,6 +551,33 @@ efficientdet_model_param_dict = dict(
         backbone_args=dict(drop_path_rate=0.2),
         url='https://github.com/rwightman/efficientdet-pytorch/releases/download/v0.1/tf_efficientdet_d7_53-6d1d7a95.pth'
     ),
+    tf_efficientdet_d7x_128=dict(
+        name='tf_efficientdet_d7x',
+        backbone_name='tf_efficientnet_b7',
+        image_size=(128, 128),
+        fpn_channels=384,
+        fpn_cell_repeats=8,
+        box_class_repeats=5,
+        anchor_scale=4.0,
+        max_level=8,
+        fpn_name='bifpn_sum',  # Use unweighted sum for training stability.
+        backbone_args=dict(drop_path_rate=0.2),
+        url='https://github.com/rwightman/efficientdet-pytorch/releases/download/v0.1/tf_efficientdet_d7x-f390b87c.pth'
+    ),
+    tf_efficientdet_lite0_128=dict(
+        name='tf_efficientdet_lite0',
+        backbone_name='tf_efficientnet_lite0',
+        image_size=(128, 128),
+        fpn_channels=64,
+        fpn_cell_repeats=3,
+        box_class_repeats=3,
+        act_type='relu',
+        redundant_bias=False,
+        backbone_args=dict(drop_path_rate=0.1),
+        # unlike other tf_ models, this was not ported from tf automl impl, but trained from tf pretrained efficient lite
+        # weights using this code, will likely replace if/when official det-lite weights are released
+        url='https://github.com/rwightman/efficientdet-pytorch/releases/download/v0.1/tf_efficientdet_lite0-f5f303a9.pth',
+    )
 )
 
 
