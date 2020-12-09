@@ -540,7 +540,7 @@ efficientdet_model_param_dict = dict(
         url='https://github.com/rwightman/efficientdet-pytorch/releases/download/v0.1/efficientdet_d0-f3276ba8.pth',
     ),
     tf_efficientdet_d7_128=dict(
-        name='tf_efficientdet_d7',
+        name='tf_efficientdet_d7_128',
         backbone_name='tf_efficientnet_b6',
         image_size=(128, 128),
         fpn_channels=384,
@@ -552,7 +552,7 @@ efficientdet_model_param_dict = dict(
         url='https://github.com/rwightman/efficientdet-pytorch/releases/download/v0.1/tf_efficientdet_d7_53-6d1d7a95.pth'
     ),
     tf_efficientdet_d7x_128=dict(
-        name='tf_efficientdet_d7x',
+        name='tf_efficientdet_d7x_128',
         backbone_name='tf_efficientnet_b7',
         image_size=(128, 128),
         fpn_channels=384,
@@ -565,7 +565,7 @@ efficientdet_model_param_dict = dict(
         url='https://github.com/rwightman/efficientdet-pytorch/releases/download/v0.1/tf_efficientdet_d7x-f390b87c.pth'
     ),
     tf_efficientdet_lite0_128=dict(
-        name='tf_efficientdet_lite0',
+        name='tf_efficientdet_lite0_128',
         backbone_name='tf_efficientnet_lite0',
         image_size=(128, 128),
         fpn_channels=64,
