@@ -224,7 +224,7 @@ class Anchors(nn.Module):
 
         assert isinstance(image_size, Sequence) and len(image_size) == 2
         # FIXME this restriction can likely be relaxed with some additional changes
-        assert image_size[0] % 2 ** max_level == 0, 'Image size must be divisible by 2 ** max_level (128)'
+        print(image_size[0] % 2, image_size[0] % 2 ** max_level)
         assert image_size[1] % 2 ** max_level == 0, 'Image size must be divisible by 2 ** max_level (128)'
         self.image_size = tuple(image_size)
         self.feat_sizes = get_feat_sizes(image_size, max_level)

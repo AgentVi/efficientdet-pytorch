@@ -577,6 +577,21 @@ efficientdet_model_param_dict = dict(
         # unlike other tf_ models, this was not ported from tf automl impl, but trained from tf pretrained efficient lite
         # weights using this code, will likely replace if/when official det-lite weights are released
         url='https://github.com/rwightman/efficientdet-pytorch/releases/download/v0.1/tf_efficientdet_lite0-f5f303a9.pth',
+    ),
+    tf_efficientdet_lite0_96=dict(
+        name='tf_efficientdet_lite0_96',
+        backbone_name='tf_efficientnet_lite0',
+        image_size=(96, 96),
+        fpn_channels=64,
+        max_level=5,
+        fpn_cell_repeats=3,
+        box_class_repeats=3,
+        act_type='relu',
+        redundant_bias=False,
+        backbone_args=dict(drop_path_rate=0.1),
+        # unlike other tf_ models, this was not ported from tf automl impl, but trained from tf pretrained efficient lite
+        # weights using this code, will likely replace if/when official det-lite weights are released
+        #url='https://github.com/rwightman/efficientdet-pytorch/releases/download/v0.1/tf_efficientdet_lite0-f5f303a9.pth',
     )
 )
 
